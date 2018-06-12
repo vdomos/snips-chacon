@@ -39,8 +39,8 @@ def action_wrapper(hermes, intentMessage, conf):
     """
 
     if len(intentMessage.slots.house_room) > 0:
-        house_room = intentMessage.slots.house_room.first().value # We extract the value from the slot "house_room"
-        result_sentence = u"Eteints la lumière du : {}".format(str(house_room))  # The response that will be said out loud by the TTS engine.
+        room = intentMessage.slots.house_room.first().value    # We extract the value from the slot "house_room"
+        result_sentence = u"Eteints la lumière du : {}".format(str(room))  # The response that will be said out loud by the TTS engine.
     else:
         result_sentence = u"Eteints la lumière"
     current_session_id = intentMessage.session_id
