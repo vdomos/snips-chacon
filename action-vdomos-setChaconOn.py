@@ -40,9 +40,9 @@ def action_wrapper(hermes, intentMessage, conf):
 
     if len(intentMessage.slots.house_room) > 0:
         room = intentMessage.slots.house_room.first().value # We extract the value from the slot "house_room"
-        result_sentence = u"Allume la lumiere de {}".format(str(room))  # The response that will be said out loud by the TTS engine.
+        result_sentence = "Lumiere {} allumée".format(str(room))  # The response that will be said out loud by the TTS engine.
     else:
-        result_sentence = u"Allume la lumiere"
+        result_sentence = "Lumiere allumée"
     current_session_id = intentMessage.session_id
     hermes.publish_end_session(current_session_id, result_sentence)
     
@@ -50,5 +50,5 @@ def action_wrapper(hermes, intentMessage, conf):
 
 if __name__ == "__main__":
     with Hermes("localhost:1883") as h:
-        h.subscribe_intent("vdomos:lightsTurnOn", subscribe_intent_callback) \
+        h.subscribe_intent("vdomos:setChaconOn", subscribe_intent_callback) \
          .start()
