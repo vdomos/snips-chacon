@@ -1,6 +1,6 @@
 # Commande de lumières pour l'assitant vocal snips.ai.
 
-Ceci est mon premier **skill** pour [Snips](https://www.snips.ai), inspiré de "Lumière Connectée"
+Ceci est un premier **skill** pour [Snips](https://www.snips.ai), inspiré de "Lumière Connectée"
 
 L'assistant allumera ou éteindra la lampe demandée
 
