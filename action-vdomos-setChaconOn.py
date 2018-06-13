@@ -34,12 +34,13 @@ def subscribe_intent_callback(hermes, intentMessage):
 
 def httpSetChacon(room):
     url = DMGCMDURL + ROOMSID[room] + "?state=1"        # "http://hermes:40406/rest/cmd/id/7?state=1"
+    print("url = %s" % url)
     try:
         req = requests.get(url)
     except requests.exceptions.RequestException as err:
         print("Erreur RequestException: '%s'" % err)
         return False
-    if req.status_code != 200:
+    if req.status_code != 200 and req.status_code != 204:
         print("Erreur RequestHttp: '%s'" % req.status_code)
         return False
     return True
@@ -55,7 +56,6 @@ def action_wrapper(hermes, intentMessage, conf):
     Refer to the documentation for further details. 
     """
 
-    print("intentMessage = %s" % dir(intentMessage))
     if len(intentMessage.slots.house_room) > 0:
         room = intentMessage.slots.house_room.first().value             # We extract the value from the slot "house_room"
         if httpSetChacon(room):

@@ -5,6 +5,7 @@ import ConfigParser
 from hermes_python.hermes import Hermes
 from hermes_python.ontology import *
 import io
+import requests
 
 CONFIGURATION_ENCODING_FORMAT = "utf-8"
 CONFIG_INI = "config.ini"
@@ -33,12 +34,13 @@ def subscribe_intent_callback(hermes, intentMessage):
 
 def httpSetChacon(room):
     url = DMGCMDURL + ROOMSID[room] + "?state=0"        # "http://hermes:40406/rest/cmd/id/7?state=0"
+    print("url = %s" % url)
     try:
         req = requests.get(url)
     except requests.exceptions.RequestException as err:
         print("Erreur RequestException: '%s'" % err)
         return False
-    if req.status_code != 200:
+    if req.status_code != 200 and req.status_code != 204:
         print("Erreur RequestHttp: '%s'" % req.status_code)
         return False
     return True
@@ -54,11 +56,10 @@ def action_wrapper(hermes, intentMessage, conf):
     Refer to the documentation for further details. 
     """
 
-    print("intentMessage = " % dir(intentMessage))
     if len(intentMessage.slots.house_room) > 0:
         room = intentMessage.slots.house_room.first().value             # We extract the value from the slot "house_room"
         if httpSetChacon(room):
-            result_sentence = "Lumière {} allumée".format(str(room))    # The response that will be said out loud by the TTS engine.
+            result_sentence = "Lumière {} éteinte".format(str(room))    # The response that will be said out loud by the TTS engine.
         else:
             result_sentence = "Echec commande lumière {}".format(str(room))            
     else:
