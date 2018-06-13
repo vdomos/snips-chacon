@@ -54,13 +54,16 @@ def action_wrapper(hermes, intentMessage, conf):
     Refer to the documentation for further details. 
     """
 
+    print("intentMessage = " % format(intentMessage))
     if len(intentMessage.slots.house_room) > 0:
-        room = intentMessage.slots.house_room.first().value    # We extract the value from the slot "house_room"
-        result_sentence = "Lumière {} éteinte".format(str(room))  # The response that will be said out loud by the TTS engine.
+        room = intentMessage.slots.house_room.first().value             # We extract the value from the slot "house_room"
+        if httpSetChacon(room):
+            result_sentence = "Lumière {} allumée".format(str(room))    # The response that will be said out loud by the TTS engine.
+        else:
+            result_sentence = "Echec commande lumière {}".format(str(room))            
     else:
-        result_sentence = "Lumière éteinte"
-    current_session_id = intentMessage.session_id
-    hermes.publish_end_session(current_session_id, result_sentence)
+        pass
+    hermes.publish_end_session(intentMessage.session_id, result_sentence)
     
 
 if __name__ == "__main__":
