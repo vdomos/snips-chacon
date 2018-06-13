@@ -1,22 +1,20 @@
-# Generated Snips skill
+# Commande de lumières pour l'assitant vocal snips.ai.
 
-Commande de lumières Chacon
+Ceci est un premier test de skill inspiré de "Lumière Connectée"
 
-This is a generated python2 snips skill using the `snips-template` tool.
-It is compatible with the format expected by the `snips-skill-server`
+L'assistant allumera ou eteindra la lampe demandée avec ce type de message:
 
-## Setup
+* allume la lumière du salon
+* allume la lumière de la cuisine
+* éteint la lumière du salon
+* ferme la lumière du canapé
 
-This skill requires some python dependencies to work properly, these are
-listed in the `requirements.txt`. You can use the `setup.sh` script to
-create a python virtualenv that will be recognized by the skill server
-and install them in it.
+En cours ...
 
-## Executables
+Les messages vocaux sont bien interprétés et les actions exécutées.
 
-This dir contains a number of python executables named `action-*.py`.
-One such file is generated per intent supported. These are standalone
-executables and will perform a connection to MQTT and register on the
-given intent using the `hermes-python` helper lib.
+il reste à faire le lien avec la commande métèrielle ...
+
+Ce skill est fourni pour [Snips](https://www.snips.ai). 
 
 
