@@ -55,7 +55,7 @@ def action_wrapper(hermes, intentMessage, conf):
     Refer to the documentation for further details. 
     """
 
-    print("intentMessage = " % format(intentMessage))
+    print("intentMessage = %s" % dir(intentMessage))
     if len(intentMessage.slots.house_room) > 0:
         room = intentMessage.slots.house_room.first().value             # We extract the value from the slot "house_room"
         if httpSetChacon(room):
