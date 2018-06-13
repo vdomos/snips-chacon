@@ -1,8 +1,9 @@
 # Commande de lumières pour l'assitant vocal snips.ai.
 
-Ceci est un premier test de skill inspiré de "Lumière Connectée"
+Ceci est mon premier **skill** pour [Snips](https://www.snips.ai), inspiré de "Lumière Connectée"
 
-L'assistant allumera ou eteindra la lampe demandée
+L'assistant allumera ou éteindra la lampe demandée
+
 
 ## Exemple de messages
 
@@ -11,13 +12,12 @@ L'assistant allumera ou eteindra la lampe demandée
 * éteint la lumière du salon
 * ferme la lumière du canapé
 
-Ce skill est fourni pour [Snips](https://www.snips.ai). 
 
 ## Pilotage des lumières
 
 Les scripts **actions** font appel à une requête REST vers [Domogik](http://www.domogik.org)  pour piloter les lumières.
 
-Domogik est un logiciel de domotique "open source".
+[Domogik](http://www.domogik.org) est un logiciel de domotique "open source".
 
 
 ## Matériels utilisés pour snips
