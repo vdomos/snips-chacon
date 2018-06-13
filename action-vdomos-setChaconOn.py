@@ -5,9 +5,13 @@ import ConfigParser
 from hermes_python.hermes import Hermes
 from hermes_python.ontology import *
 import io
+import requests
 
 CONFIGURATION_ENCODING_FORMAT = "utf-8"
 CONFIG_INI = "config.ini"
+
+ROOMSID = {"salon": "5", "canapé": "6", "séjour": "7", "cuisine": "8"}
+DMGCMDURL = "http://hermes:40406/rest/cmd/id/"
 
 class SnipsConfigParser(ConfigParser.SafeConfigParser):
     def to_dict(self):
@@ -28,6 +32,19 @@ def subscribe_intent_callback(hermes, intentMessage):
     action_wrapper(hermes, intentMessage, conf)
 
 
+def httpSetChacon(room):
+    url = DMGCMDURL + ROOMSID[room] + "?state=1"        # "http://hermes:40406/rest/cmd/id/7?state=1"
+    try:
+        req = requests.get(url)
+    except requests.exceptions.RequestException as err:
+        print("Erreur RequestException: '%s'" % err)
+        return False
+    if req.status_code != 200:
+        print("Erreur RequestHttp: '%s'" % req.status_code)
+        return False
+    return True
+
+
 def action_wrapper(hermes, intentMessage, conf):
     """ Write the body of the function that will be executed once the intent is recognized. 
     In your scope, you have the following objects : 
@@ -38,13 +55,16 @@ def action_wrapper(hermes, intentMessage, conf):
     Refer to the documentation for further details. 
     """
 
+    print("intentMessage = " % format(intentMessage))
     if len(intentMessage.slots.house_room) > 0:
-        room = intentMessage.slots.house_room.first().value # We extract the value from the slot "house_room"
-        result_sentence = "Lumiere {} allumée".format(str(room))  # The response that will be said out loud by the TTS engine.
+        room = intentMessage.slots.house_room.first().value             # We extract the value from the slot "house_room"
+        if httpSetChacon(room):
+            result_sentence = "Lumiere {} allumée".format(str(room))    # The response that will be said out loud by the TTS engine.
+        else:
+            result_sentence = "Echec commande lumiere {}".format(str(room))            
     else:
-        result_sentence = "Lumiere allumée"
-    current_session_id = intentMessage.session_id
-    hermes.publish_end_session(current_session_id, result_sentence)
+        pass
+    hermes.publish_end_session(intentMessage.session_id, result_sentence)
     
 
 

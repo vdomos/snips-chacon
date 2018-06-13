@@ -9,6 +9,9 @@ import io
 CONFIGURATION_ENCODING_FORMAT = "utf-8"
 CONFIG_INI = "config.ini"
 
+ROOMSID = {"salon": "5", "canapé": "6", "séjour": "7", "cuisine": "8"}
+DMGCMDURL = "http://hermes:40406/rest/cmd/id/"
+
 class SnipsConfigParser(ConfigParser.SafeConfigParser):
     def to_dict(self):
         return {section : {option_name : option for option_name, option in self.items(section)} for section in self.sections()}
@@ -26,6 +29,19 @@ def read_configuration_file(configuration_file):
 def subscribe_intent_callback(hermes, intentMessage):
     conf = read_configuration_file(CONFIG_INI)
     action_wrapper(hermes, intentMessage, conf)
+
+
+def httpSetChacon(room):
+    url = DMGCMDURL + ROOMSID[room] + "?state=0"        # "http://hermes:40406/rest/cmd/id/7?state=0"
+    try:
+        req = requests.get(url)
+    except requests.exceptions.RequestException as err:
+        print("Erreur RequestException: '%s'" % err)
+        return False
+    if req.status_code != 200:
+        print("Erreur RequestHttp: '%s'" % req.status_code)
+        return False
+    return True
 
 
 def action_wrapper(hermes, intentMessage, conf):
