@@ -19,6 +19,7 @@ Les scripts **actions** font appel à une requête REST vers [Domogik](http://ww
 
 [Domogik](http://www.domogik.org) est un logiciel de domotique "open source".
 
+Les lumières sont reliées à des **modules Chacon/Dio 433MHz** controlés par le plugin "Script" de **Domogik**.
 
 ## Matériels utilisés pour snips
 
