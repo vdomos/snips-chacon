@@ -23,7 +23,14 @@ Les lumières sont reliées à des **modules Chacon/Dio 433MHz** controlés par 
 
 ## Matériels utilisés pour snips
 
-**Raspberry-Pi3** + **ReSpeaker 4-Mic Array for Raspberry Pi**:
+**Raspberry-Pi3** + **ReSpeaker 4-Mic Array for Raspberry Pi**
 
 ![ReSpeaker 4-Mic Array + Raspberry Pi](ReSpeaker_4-Mic_Array.jpg)
+
+## Animation des LEDs du 'ReSpeaker 4-Mic Array'
+
+Dans le répertoire 4mics_hat se trouve le programme python [listeningSnipsEvents.py](4mics_hat/listeningSnipsEvents.py) pour piloter les LEDs du ReSpeaker en fonction des messages MQTT de Snips comme dans les exemples fourni ici (https://snips.gitbook.io/tutorials/t/technical-guides/listening-to-intents-over-mqtt-using-python)
+
+
+
 
