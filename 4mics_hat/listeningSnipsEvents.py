@@ -4,9 +4,6 @@
 '''
 14/6/2018
 https://snips.gitbook.io/tutorials/t/technical-guides/listening-to-intents-over-mqtt-using-python
-Voir shéma du protocole Hermes pour voir les différents messages MQTT.
-
-You will most likely be interested in the following messages:
     hermes/hotword/<hotword_id>detected: 
         when a wakeword is detected, this message will be sent, and Snips will listening to your voice command. 
         You can for instance use this message to play a little tone, or start a led animation, indicating the start of a listening session
@@ -16,7 +13,8 @@ You will most likely be interested in the following messages:
     hermes/intent/<intent_name>: after text has been captured, 
         the NLU module will process the text and transform it into an intent, which is the final representation of your query that you can use as an actionable item. 
         This is where you want to put your intent handler code
-    
+
+Exemple pour piloter les LEDs    
 https://github.com/respeaker/4mics_hat/pixels_demo.py
 '''
 
